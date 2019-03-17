@@ -98,9 +98,18 @@ sudo ufw status
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow ssh
+sudo ufw allow 2200
 sudo ufw allow www
 sudo ufw enable
 ```
+
+Add the following line to ```/etc/ssh/sshd_config```
+
+```
+Port 2200
+```
+
+Use the GUI of AWS Lightsail of VM instance config, in the Networking tab, add Firewall rule to allow TCP 2200.
 
 # Common problems and solutions
 #### Apache shows the default page despite the virtual host config matches exactly the application site.
