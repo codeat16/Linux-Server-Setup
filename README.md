@@ -97,19 +97,30 @@ Enable the basic firewall using ufw.
 sudo ufw status
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
-sudo ufw allow ssh
+sudo ufw deny ssh
 sudo ufw allow 2200
 sudo ufw allow www
 sudo ufw enable
 ```
 
-Add the following line to ```/etc/ssh/sshd_config```
+Add the following line to ```/etc/ssh/sshd_config``` to enable ssh on port 2200 but not port 22, and disable root login entirely.
 
 ```
+# Port 22
 Port 2200
+PermitRootLogin no
+```
+
+Patch the software to the latest version to minimize the potential vulnerabilities.
+
+```
+sudo apt-get update
+sudo apt-get upgrade
 ```
 
 Use the GUI of AWS Lightsail of VM instance config, in the Networking tab, add Firewall rule to allow TCP 2200.
+
+
 
 # Common problems and solutions
 #### Apache shows the default page despite the virtual host config matches exactly the application site.
